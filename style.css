@@ -1,0 +1,1204 @@
+/* ═══════════════════════════════════════════════════
+   VÍCE ADMIRÁL JIŘÍK – OSOBNÍ FLOTILA
+   style.css · Hvězdná flotila · Dark Futuristic Theme
+   Autor: Admirál Claude.AI · 2026
+═══════════════════════════════════════════════════ */
+
+/* ─── CSS PROMĚNNÉ (Design Tokens) ─── */
+:root {
+  /* Barvy */
+  --bg-deep:       #050a12;
+  --bg-panel:      #090f1c;
+  --bg-card:       #0d1626;
+  --bg-card-hover: #111e35;
+  --bg-code:       #060c18;
+
+  --accent-gold:   #c8930a;
+  --accent-gold-l: #f0b740;
+  --accent-cyan:   #00c8d4;
+  --accent-cyan-d: #007a82;
+  --accent-red:    #d63838;
+  --accent-red-l:  #ff5e5e;
+  --accent-green:  #22c97e;
+  --accent-purple: #6d4fc2;
+
+  --text-primary:  #e8edf7;
+  --text-secondary:#8fa3c0;
+  --text-muted:    #4a5e7a;
+  --text-code:     #7dd3fc;
+
+  --border-main:   rgba(0, 200, 212, 0.15);
+  --border-gold:   rgba(200, 147, 10, 0.3);
+  --border-glow:   rgba(0, 200, 212, 0.4);
+
+  /* Typografie */
+  --font-display:  'Orbitron', sans-serif;
+  --font-body:     'Exo 2', sans-serif;
+
+  /* Mezery */
+  --spacing-xs:    0.25rem;
+  --spacing-sm:    0.5rem;
+  --spacing-md:    1rem;
+  --spacing-lg:    1.5rem;
+  --spacing-xl:    2.5rem;
+  --spacing-xxl:   4rem;
+
+  /* Rádiusy */
+  --radius-sm:     4px;
+  --radius-md:     8px;
+  --radius-lg:     14px;
+
+  /* Přechody */
+  --transition:    0.25s ease;
+  --transition-slow: 0.4s ease;
+}
+
+/* ─── RESET & BASE ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(0, 200, 212, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(200, 147, 10, 0.04) 0%, transparent 55%);
+}
+
+/* ─── HVĚZDNÉ POZADÍ (pseudo-efekt přes body) ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.18) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.12) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 10%, rgba(255,255,255,0.15) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 75%, rgba(255,255,255,0.1)  0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 90%, rgba(255,255,255,0.13) 0%, transparent 100%),
+    radial-gradient(1px 1px at 8%  85%, rgba(255,255,255,0.1)  0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Vše nad hvězdami */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ══════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════ */
+.site-header {
+  background: linear-gradient(135deg, #070d1a 0%, #0a1428 100%);
+  border-bottom: 2px solid var(--accent-gold);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  box-shadow: 0 2px 30px rgba(200, 147, 10, 0.18);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.logo-icon {
+  font-size: 2.4rem;
+  color: var(--accent-gold);
+  text-shadow: 0 0 20px var(--accent-gold);
+  line-height: 1;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo-title {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.logo-name {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--accent-gold-l);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 25px rgba(240, 183, 64, 0.5);
+}
+
+.header-rank {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+
+/* ══════════════════════════════════════════
+   NAVIGACE
+══════════════════════════════════════════ */
+.main-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border-main);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+  white-space: nowrap;
+}
+
+/* HOVER – jedinou povolenou animací je nav hover */
+.nav-btn:hover {
+  color: var(--accent-cyan);
+  border-bottom-color: var(--accent-cyan);
+  background: rgba(0, 200, 212, 0.06);
+}
+
+.nav-btn.active {
+  color: var(--accent-gold-l);
+  border-bottom-color: var(--accent-gold);
+  background: rgba(200, 147, 10, 0.06);
+}
+
+.nav-icon {
+  font-size: 1rem;
+}
+
+
+/* ══════════════════════════════════════════
+   STRÁNKY (přepínání)
+══════════════════════════════════════════ */
+.page {
+  display: none;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-xxl);
+}
+
+.page.active {
+  display: block;
+}
+
+
+/* ══════════════════════════════════════════
+   PAGE HEADER
+══════════════════════════════════════════ */
+.page-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xxl);
+  padding: var(--spacing-xxl) var(--spacing-md) var(--spacing-xl);
+  border-bottom: 1px solid var(--border-main);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 900;
+  color: var(--accent-gold-l);
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 40px rgba(240, 183, 64, 0.35);
+  margin-bottom: var(--spacing-sm);
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  font-style: italic;
+}
+
+
+/* ══════════════════════════════════════════
+   TIMELINE SEKCE
+══════════════════════════════════════════ */
+.timeline-section {
+  position: relative;
+  margin-bottom: var(--spacing-xxl);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-main);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
+}
+
+.section-badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+}
+
+.badge-sou    { background: rgba(0, 200, 212, 0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan-d); }
+.badge-zs     { background: rgba(200, 147, 10, 0.15); color: var(--accent-gold-l); border: 1px solid var(--border-gold); }
+.badge-cejov  { background: rgba(34, 201, 126, 0.12); color: var(--accent-green); border: 1px solid rgba(34,201,126,0.3); }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: 0.05em;
+}
+
+.section-note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-xl);
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+
+/* ─── TIMELINE KONTEJNER ─── */
+.timeline {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+/* Vertikální čára */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent-cyan-d) 10%,
+    var(--accent-cyan-d) 90%,
+    transparent
+  );
+}
+
+
+/* ─── SKUPINY OBORŮ ─── */
+.timeline-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.group-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  margin-bottom: var(--spacing-md);
+  margin-left: 0;
+}
+
+.label-zednik   { background: rgba(0, 200, 212, 0.1); color: var(--accent-cyan); border: 1px solid rgba(0,200,212,0.25); }
+.label-truhlar  { background: rgba(200,147,10,0.1); color: var(--accent-gold-l); border: 1px solid var(--border-gold); }
+.label-zamecnik { background: rgba(109,79,194,0.1); color: #a587e8; border: 1px solid rgba(109,79,194,0.3); }
+
+
+/* ─── TIMELINE ITEM ─── */
+.timeline-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Tečka na časové ose */
+.timeline-dot {
+  position: absolute;
+  left: -2.2rem;
+  top: 1rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-cyan-d);
+  border: 2px solid var(--accent-cyan);
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.timeline-dot.dot-current {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold-l);
+  box-shadow: 0 0 12px var(--accent-gold);
+}
+
+.timeline-dot.dot-fail {
+  background: var(--accent-red);
+  border-color: var(--accent-red-l);
+}
+
+.timeline-dot.dot-split {
+  background: var(--accent-gold-l);
+  border-color: var(--accent-gold);
+}
+
+.timeline-dot.dot-trek {
+  background: var(--accent-green);
+  border-color: #58f0a8;
+  box-shadow: 0 0 10px var(--accent-green);
+}
+
+
+/* ─── TIMELINE KARTA ─── */
+.timeline-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-main);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  width: 100%;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.timeline-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-glow);
+}
+
+.card-current {
+  border-color: rgba(200, 147, 10, 0.35);
+  background: rgba(13, 22, 38, 1);
+}
+
+.card-fail {
+  border-color: rgba(214, 56, 56, 0.25);
+}
+
+.card-split {
+  border-color: rgba(200, 147, 10, 0.3);
+}
+
+.card-trek {
+  border-color: rgba(34, 201, 126, 0.25);
+}
+
+.card-year {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-xs);
+}
+
+.card-age {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.age-badge {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 200, 212, 0.1);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0,200,212,0.2);
+  letter-spacing: 0.1em;
+}
+
+.grade-badge {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(200, 147, 10, 0.1);
+  color: var(--accent-gold-l);
+  border: 1px solid var(--border-gold);
+  letter-spacing: 0.1em;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.card-school {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.card-note {
+  margin-top: var(--spacing-sm);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  border-left: 2px solid var(--accent-gold);
+  padding-left: var(--spacing-sm);
+}
+
+.card-status {
+  margin-top: var(--spacing-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.status-active { color: var(--accent-gold-l); }
+.status-fail   { color: var(--accent-red-l); }
+.status-trek   { color: var(--accent-green); }
+
+/* Split karta pro přestupní rok */
+.card-split-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: rgba(0,0,0,0.2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-gold);
+}
+
+.split-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.split-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.split-school {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-gold-l);
+}
+
+.split-arrow {
+  color: var(--accent-cyan);
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0 var(--spacing-xs);
+}
+
+
+/* ══════════════════════════════════════════
+   PC FLOTILA – STRÁNKA 2
+══════════════════════════════════════════ */
+
+/* Nultá éra */
+.pc-era-zero {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed var(--text-muted);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.era-zero-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* PC MŘÍŽKA */
+.pc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xxl);
+}
+
+/* PC KARTA */
+.pc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-main);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.pc-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-glow);
+  transform: translateY(-2px);
+}
+
+/* Speciální varianty karet */
+.pc-card-special {
+  border-color: rgba(240, 183, 64, 0.3);
+}
+
+.pc-card-bernard {
+  border-color: rgba(200, 100, 10, 0.3);
+}
+
+.pc-card-current {
+  border-color: rgba(0, 200, 212, 0.4);
+  box-shadow: 0 0 30px rgba(0, 200, 212, 0.08);
+  grid-column: span 2;
+}
+
+/* Číslo v pozadí */
+.pc-number {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-lg);
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.pc-icon-wrap {
+  margin-bottom: var(--spacing-xs);
+}
+
+.pc-icon {
+  font-size: 1.8rem;
+}
+
+.pc-era-label {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.pc-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+}
+
+/* Detail seznam */
+.pc-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: var(--spacing-sm) 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: var(--spacing-sm);
+}
+
+.pc-detail {
+  display: flex;
+  gap: var(--spacing-sm);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.pd-label {
+  color: var(--text-muted);
+  font-weight: 600;
+  min-width: 80px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  padding-top: 1px;
+  flex-shrink: 0;
+}
+
+.pd-val {
+  color: var(--text-secondary);
+}
+
+/* Badge typy */
+.pc-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.badge-gift    { background: rgba(200,147,10,0.12); color: var(--accent-gold-l); border: 1px solid var(--border-gold); }
+.badge-xmas    { background: rgba(34,201,126,0.1);  color: var(--accent-green); border: 1px solid rgba(34,201,126,0.3); }
+.badge-bernard { background: rgba(200,80,10,0.12);  color: #f09040; border: 1px solid rgba(200,80,10,0.3); }
+.badge-current { background: rgba(0,200,212,0.1);   color: var(--accent-cyan); border: 1px solid var(--accent-cyan-d); }
+
+/* Story text */
+.pc-story {
+  margin-top: var(--spacing-xs);
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--text-muted);
+  border-left: 2px solid var(--accent-cyan-d);
+  padding-left: var(--spacing-sm);
+  line-height: 1.5;
+}
+
+
+/* ══════════════════════════════════════════
+   HOW-TO SEKCE (šablony)
+══════════════════════════════════════════ */
+.how-to-section {
+  background: var(--bg-code);
+  border: 1px solid var(--border-main);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-top: var(--spacing-xxl);
+}
+
+.howto-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.08em;
+  margin-bottom: var(--spacing-md);
+}
+
+.howto-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.howto-content p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.howto-content code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: var(--text-code);
+  background: rgba(0,0,0,0.3);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.howto-content strong {
+  color: var(--accent-gold-l);
+}
+
+.code-block {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(0, 200, 212, 0.15);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: var(--text-code);
+  line-height: 1.6;
+  white-space: pre;
+}
+
+
+/* ══════════════════════════════════════════
+   VĚNOVÁNÍ – STRÁNKA 3
+══════════════════════════════════════════ */
+.dedication-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: var(--spacing-xxl) var(--spacing-md);
+}
+
+.ded-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xxl);
+}
+
+.ded-starfleet-logo {
+  font-size: 3.5rem;
+  color: var(--accent-gold);
+  text-shadow: 0 0 40px rgba(200, 147, 10, 0.6);
+  margin-bottom: var(--spacing-md);
+  display: block;
+}
+
+.ded-subtitle {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-sm);
+}
+
+.ded-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 900;
+  color: var(--accent-gold-l);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 30px rgba(240, 183, 64, 0.4);
+  margin-bottom: var(--spacing-sm);
+}
+
+.ded-from {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+}
+
+.ded-content {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xxl) var(--spacing-xl);
+  box-shadow:
+    0 0 60px rgba(200, 147, 10, 0.06),
+    0 4px 40px rgba(0,0,0,0.4);
+}
+
+.ded-block {
+  margin-bottom: var(--spacing-lg);
+}
+
+.ded-text {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+  font-weight: 300;
+}
+
+.ded-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.ded-text em {
+  color: var(--accent-cyan);
+  font-style: italic;
+}
+
+.ded-block-final {
+  background: rgba(200, 147, 10, 0.04);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  text-align: center;
+}
+
+.ded-text-big {
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 600;
+  color: var(--accent-gold-l);
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  font-style: normal;
+}
+
+.ded-divider {
+  text-align: center;
+  color: var(--text-muted);
+  letter-spacing: 0.5em;
+  font-size: 0.7rem;
+  margin: var(--spacing-lg) 0;
+  opacity: 0.5;
+}
+
+.ded-signature {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--border-main);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.sig-icon {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.sig-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.1em;
+}
+
+.sig-rank {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  font-style: italic;
+}
+
+.sig-stardate {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: var(--spacing-xs);
+}
+
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+.site-footer {
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border-main);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  text-align: center;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.footer-sep {
+  opacity: 0.3;
+}
+
+
+/* ══════════════════════════════════════════
+   MEDIA QUERIES
+══════════════════════════════════════════ */
+
+/* ─── XL: > 1200px ─── */
+@media (min-width: 1201px) {
+  .pc-card-current {
+    grid-column: span 2;
+  }
+}
+
+/* ─── LG: 1025px – 1200px ─── */
+@media (max-width: 1200px) {
+  .pc-card-current {
+    grid-column: span 2;
+  }
+
+  .page {
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+}
+
+/* ─── MD: 769px – 1024px ─── */
+@media (max-width: 1024px) {
+  .pc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pc-card-current {
+    grid-column: span 2;
+  }
+
+  .ded-content {
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+}
+
+/* ─── SM: 601px – 768px ─── */
+@media (max-width: 768px) {
+  :root {
+    --spacing-xl:  1.8rem;
+    --spacing-xxl: 2.8rem;
+  }
+
+  .site-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .header-rank {
+    display: none;
+  }
+
+  .logo-name {
+    font-size: 1.4rem;
+  }
+
+  .main-nav {
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .nav-btn {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 0.65rem;
+  }
+
+  .page {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .timeline-section {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .timeline {
+    padding-left: 2rem;
+  }
+
+  .timeline-dot {
+    left: -1.75rem;
+    width: 10px;
+    height: 10px;
+  }
+
+  .pc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pc-card-current {
+    grid-column: span 1;
+  }
+
+  .card-split-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .split-arrow {
+    transform: rotate(90deg);
+  }
+
+  .dedication-wrap {
+    padding: var(--spacing-xl) var(--spacing-xs);
+  }
+
+  .ded-content {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-sep {
+    display: none;
+  }
+}
+
+/* ─── XS: ≤ 600px ─── */
+@media (max-width: 600px) {
+  :root {
+    --spacing-xl:  1.4rem;
+    --spacing-xxl: 2.2rem;
+  }
+
+  .logo-title {
+    font-size: 0.6rem;
+  }
+
+  .logo-name {
+    font-size: 1.2rem;
+  }
+
+  .logo-icon {
+    font-size: 1.8rem;
+  }
+
+  .nav-btn .nav-label {
+    display: none;
+  }
+
+  .nav-btn {
+    padding: var(--spacing-md);
+    font-size: 1.2rem;
+  }
+
+  .nav-icon {
+    font-size: 1.3rem;
+  }
+
+  .timeline-section {
+    padding: var(--spacing-md);
+  }
+
+  .timeline {
+    padding-left: 1.6rem;
+  }
+
+  .timeline-dot {
+    left: -1.4rem;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  .timeline-card {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .how-to-section {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .code-block {
+    font-size: 0.68rem;
+    padding: var(--spacing-md);
+  }
+
+  .ded-text {
+    font-size: 0.92rem;
+  }
+
+  .ded-content {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  .ded-starfleet-logo {
+    font-size: 2.5rem;
+  }
+
+  .pc-number {
+    font-size: 1.8rem;
+  }
+
+  .pc-card {
+    padding: var(--spacing-md);
+  }
+
+  .pd-label {
+    min-width: 65px;
+  }
+}
+
+/* ─── VELMI MALÉ: ≤ 380px ─── */
+@media (max-width: 380px) {
+  .logo-name {
+    font-size: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .site-footer {
+    display: none;
+  }
+}
+
+/* ─── TISK ─── */
+@media print {
+  .main-nav,
+  .site-footer,
+  .how-to-section {
+    display: none;
+  }
+
+  .page {
+    display: block !important;
+    page-break-before: always;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .timeline-card,
+  .pc-card {
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    break-inside: avoid;
+  }
+
+  .page-title,
+  .section-title,
+  .card-title,
+  .pc-name {
+    color: #000;
+  }
+
+  .text-secondary,
+  .text-muted {
+    color: #555;
+  }
+}
